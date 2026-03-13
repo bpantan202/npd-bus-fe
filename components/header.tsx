@@ -31,17 +31,17 @@ export function Header() {
           </Link>
 
           <Link
-            href="/bus-routes"
-            className="text-gray-600 hover:text-sky-700 cursor-pointer"
-          >
-            เส้นทางรถ
-          </Link>
-
-          <Link
             href="/booking"
             className="text-gray-600 hover:text-sky-700 cursor-pointer"
           >
             จองตั๋วโดยสาร
+          </Link>
+
+          <Link
+            href="/my-ticket"
+            className="text-gray-600 hover:text-sky-700 cursor-pointer"
+          >
+            ตั๋วของฉัน
           </Link>
 
           <Link
@@ -70,11 +70,11 @@ export function Header() {
                 <Link href="/" className="hover:text-sky-700">
                   หน้าแรก
                 </Link>
-                <Link href="/bus-routes" className="hover:text-sky-700">
-                  เส้นทางรถ
-                </Link>
                 <Link href="/booking" className="hover:text-sky-700">
                   จองตั๋วโดยสาร
+                </Link>
+                <Link href="/my-ticket" className="hover:text-sky-700">
+                  ตั๋วของฉัน
                 </Link>
                 <Link href="/contact" className="hover:text-sky-700">
                   ติดต่อ
