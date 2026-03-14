@@ -30,7 +30,7 @@ export default function LoginPage() {
 
       toast.success(res.message);
       setTimeout(() => {
-        router.push("/");
+        router.push("/me");
       }, 800);
     } catch (error: any) {
       toast.error(error.message);

@@ -47,105 +47,115 @@ export default function BusRoutesPage() {
       <h1 className="text-3xl font-bold text-sky-700 mb-2">ตั๋วของฉัน</h1>
       <p className="mb-8 text-gray-500">รายการตั๋วของฉันทั้งหมด</p>
 
-      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
-        {bookings.map((booking) => (
-          <Link
-            key={booking.booking_code}
-            href={`/ticket/${booking.booking_code}`}
-          >
-            <Card className="border border-gray-200 hover:shadow-lg hover:-translate-y-1 transform transition duration-200 pb-0">
-              <CardHeader className="flex flex-row items-center justify-center">
-                <CardTitle className="text-lg text-sky-700">
-                  {booking.round_id.route_id.origin} {">"}{" "}
-                  {booking.round_id.route_id.destination}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4 text-gray-700">
-                {/* BOOKING CODE (BIGGEST) */}
-                <div className="text-center border-y py-4">
-                  <p className="text-xs text-gray-400">รหัสจอง</p>
-                  <p className="text-3xl font-bold tracking-widest text-sky-700">
-                    {booking.booking_code}
-                  </p>
-                </div>
-
-                {/* SEAT + PLATFORM (BIG) */}
-                <div className="grid grid-cols-2 gap-4 text-center">
-                  <div className="bg-gray-50 rounded-lg py-3">
-                    <p className="text-xs text-gray-400">ที่นั่ง</p>
-                    <p className="text-xl font-semibold">
-                      {booking.seat_number}
+      {bookings.length === 0 ? (
+        <div className="text-center py-20 border rounded-xl bg-gray-50">
+          <p className="text-gray-500 text-lg">ไม่พบรายการจอง</p>
+          <p className="text-sm text-gray-400 mt-2">
+            คุณยังไม่มีตั๋วการเดินทาง
+          </p>
+        </div>
+      ) : (
+        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
+          {bookings.map((booking) => (
+            <Link
+              key={booking.booking_code}
+              href={`/ticket/${booking.booking_code}`}
+            >
+              <Card className="border border-gray-200 hover:shadow-lg hover:-translate-y-1 transform transition duration-200 pb-0">
+                <CardHeader className="flex flex-row items-center justify-center">
+                  <CardTitle className="text-lg text-sky-700">
+                    {booking.round_id.route_id.origin} {">"}{" "}
+                    {booking.round_id.route_id.destination}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4 text-gray-700">
+                  {/* BOOKING CODE (BIGGEST) */}
+                  <div className="text-center border-y py-4">
+                    <p className="text-xs text-gray-400">รหัสจอง</p>
+                    <p className="text-3xl font-bold tracking-widest text-sky-700">
+                      {booking.booking_code}
                     </p>
                   </div>
 
-                  <div className="bg-gray-50 rounded-lg py-3">
-                    <p className="text-xs text-gray-400">ชานชาลา</p>
-                    <p className="text-xl font-semibold">
-                      {booking.round_id.platform_number}
-                    </p>
-                  </div>
-                </div>
+                  {/* SEAT + PLATFORM (BIG) */}
+                  <div className="grid grid-cols-2 gap-4 text-center">
+                    <div className="bg-gray-50 rounded-lg py-3">
+                      <p className="text-xs text-gray-400">ที่นั่ง</p>
+                      <p className="text-xl font-semibold">
+                        {booking.seat_number}
+                      </p>
+                    </div>
 
-                {/* NORMAL INFO */}
-                <div className="space-y-3 p-3">
-                  {/* Passenger */}
-                  <div className="rounded-lg ">
-                    <p className="text-xs text-gray-400">ผู้โดยสาร</p>
-                    <p className="text-lg font-semibold text-gray-800">
-                      {booking.passenger.name} {booking.passenger.surname}
-                    </p>
+                    <div className="bg-gray-50 rounded-lg py-3">
+                      <p className="text-xs text-gray-400">ชานชาลา</p>
+                      <p className="text-xl font-semibold">
+                        {booking.round_id.platform_number}
+                      </p>
+                    </div>
                   </div>
 
-                  {/* Date + Time */}
-                  <div className="rounded-lg grid grid-cols-2 gap-6 items-center">
+                  {/* NORMAL INFO */}
+                  <div className="space-y-3 p-3">
+                    {/* Passenger */}
+                    <div className="rounded-lg ">
+                      <p className="text-xs text-gray-400">ผู้โดยสาร</p>
+                      <p className="text-lg font-semibold text-gray-800">
+                        {booking.passenger.name} {booking.passenger.surname}
+                      </p>
+                    </div>
+
+                    {/* Date + Time */}
+                    <div className="rounded-lg grid grid-cols-2 gap-6 items-center">
+                      <div>
+                        <p className="text-xs text-gray-400">วันเดินทาง</p>
+                        <p className="text-base font-semibold">
+                          {booking.departure_date}
+                        </p>
+                      </div>
+
+                      <div>
+                        <p className="text-xs text-gray-400">เวลา</p>
+                        <p className="text-base font-semibold">
+                          {booking.round_id.departure} -{" "}
+                          {booking.round_id.arrival}
+                        </p>
+                      </div>
+                    </div>
                     <div>
-                      <p className="text-xs text-gray-400">วันเดินทาง</p>
-                      <p className="text-base font-semibold">
-                        {booking.departure_date}
+                      <p className="text-xs text-gray-400">จุดขึ้นรถ</p>
+                      <p className="font-semibold text-gray-800">
+                        {booking.pickup_point}
                       </p>
                     </div>
 
                     <div>
-                      <p className="text-xs text-gray-400">เวลา</p>
-                      <p className="text-base font-semibold">
-                        {booking.round_id.departure} -{" "}
-                        {booking.round_id.arrival}
+                      <p className="text-xs text-gray-400">จุดลงรถ</p>
+                      <p className="font-semibold text-gray-800">
+                        {booking.dropoff_point}
                       </p>
                     </div>
                   </div>
-                  <div>
-                    <p className="text-xs text-gray-400">จุดขึ้นรถ</p>
-                    <p className="font-semibold text-gray-800">
-                      {booking.pickup_point}
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs text-gray-400">จุดลงรถ</p>
-                    <p className="font-semibold text-gray-800">
-                      {booking.dropoff_point}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-              <div
-                className={`w-full mt-4 px-4 py-3 rounded-b-xl text-neutral-100 flex justify-between items-center text-sm font-medium ${
-                  busFooterStyles[booking.round_id.bus_type] || "bg-gray-900"
-                }`}
-              >
-                <span
-                  className={`text-xs font-medium px-3 py-1 rounded-full w-fit ${
-                    statusStyles[booking.status] || "bg-gray-100 text-gray-700"
+                </CardContent>
+                <div
+                  className={`w-full mt-4 px-4 py-3 rounded-b-xl text-neutral-100 flex justify-between items-center text-sm font-medium ${
+                    busFooterStyles[booking.round_id.bus_type] || "bg-gray-900"
                   }`}
                 >
-                  {booking.status}
-                </span>
-                <span>{booking.round_id.bus_type}</span>
-              </div>
-            </Card>
-          </Link>
-        ))}
-      </div>
+                  <span
+                    className={`text-xs font-medium px-3 py-1 rounded-full w-fit ${
+                      statusStyles[booking.status] ||
+                      "bg-gray-100 text-gray-700"
+                    }`}
+                  >
+                    {booking.status}
+                  </span>
+                  <span>{booking.round_id.bus_type}</span>
+                </div>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

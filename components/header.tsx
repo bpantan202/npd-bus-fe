@@ -45,10 +45,10 @@ export function Header() {
           </Link>
 
           <Link
-            href="/contact"
+            href="/me"
             className="text-gray-600 hover:text-sky-700 cursor-pointer"
           >
-            ติดต่อ
+            โปรไฟล์
           </Link>
         </nav>
 
@@ -76,8 +76,8 @@ export function Header() {
                 <Link href="/my-ticket" className="hover:text-sky-700">
                   ตั๋วของฉัน
                 </Link>
-                <Link href="/contact" className="hover:text-sky-700">
-                  ติดต่อ
+                <Link href="/me" className="hover:text-sky-700">
+                  โปรไฟล์
                 </Link>
               </nav>
             </SheetContent>
