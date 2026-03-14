@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { login } from "@/services/auth.service";
 import { LoginRequestDTO } from "@/dto/auth.dto";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,7 +15,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { toast } = useToast();
+  const router = useRouter();
 
   const handleLogin = async () => {
     try {
@@ -27,17 +28,12 @@ export default function LoginPage() {
 
       const res = await login(payload);
 
-      toast({
-        title: "Success",
-        description: res.message,
-        className: "bg-green-600 text-white",
-      });
+      toast.success(res.message);
+      setTimeout(() => {
+        router.push("/");
+      }, 800);
     } catch (error: any) {
-      toast({
-        title: "Login Failed",
-        description: error.message,
-        className: "bg-red-600 text-white",
-      });
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }

@@ -1,7 +1,7 @@
 import { Kanit, Noto_Sans_Thai_Looped, Geist } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header";
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "sonner"
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
