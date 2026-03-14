@@ -1,6 +1,10 @@
-import { Kanit, Noto_Sans_Thai_Looped } from "next/font/google";
+import { Kanit, Noto_Sans_Thai_Looped, Geist } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/header"
+import { Header } from "@/components/header";
+import { Toaster } from "@/components/ui/toaster"
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const kanit = Kanit({
   subsets: ["thai", "latin"],
@@ -20,13 +24,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="th">
+    <html lang="th" className={cn("font-sans", geist.variable)}>
       <body
         className={`${kanit.variable} ${notoLooped.variable} font-noto-looped`}
       >
         <Header />
 
         {children}
+        <Toaster />
       </body>
     </html>
   );
